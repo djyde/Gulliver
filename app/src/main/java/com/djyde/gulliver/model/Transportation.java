@@ -2,10 +2,12 @@ package com.djyde.gulliver.model;
 
 import com.djyde.gulliver.R;
 
+import io.realm.RealmObject;
+
 /**
  * Created by randy on 15/6/1.
  */
-public class Transportation {
+public class Transportation extends RealmObject{
     private String name;
     private String id;
     private int icon;

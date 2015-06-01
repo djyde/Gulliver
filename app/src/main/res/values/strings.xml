@@ -6,4 +6,5 @@
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+    <string name="title_activity_new_trip">NewTripActivity</string>
 </resources>

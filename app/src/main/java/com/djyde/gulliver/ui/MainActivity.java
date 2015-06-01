@@ -1,5 +1,6 @@
-package com.djyde.gulliver;
+package com.djyde.gulliver.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.djyde.gulliver.R;
 import com.djyde.gulliver.adapter.TripsAdapter;
 import com.djyde.gulliver.model.Trip;
 
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.settings:
                         // TODO setting
-                        Toast.makeText(getApplicationContext(),"Setting",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),NewTripActivity.class));
                         return true;
                     case R.id.history:
                         // TODO history

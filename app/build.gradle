@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.android.support:design:22.2.0'
+    compile 'io.realm:realm-android:0.81-SNAPSHOT'
 }

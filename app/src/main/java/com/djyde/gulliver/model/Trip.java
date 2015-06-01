@@ -1,9 +1,13 @@
 package com.djyde.gulliver.model;
 
+import io.realm.RealmObject;
+
 /**
  * Created by randy on 15/6/1.
  */
-public class Trip {
+public class Trip extends RealmObject {
+
+    
     private String from;
     private String to;
     private String color;
