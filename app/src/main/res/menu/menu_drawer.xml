@@ -3,11 +3,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/history"
-            android:icon="@drawable/ic_history_black_48dp"
-            android:title="历史行程"/>
+            android:icon="@drawable/ic_trending_up_black_48dp"
+            android:title="@string/analyze"/>
         <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_settings_black_48dp"
-            android:title="设置"/>
+            android:title="@string/setting"/>
     </group>
 </menu>
