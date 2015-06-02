@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.widget.Toast;
 
 import com.djyde.gulliver.ui.NewTripActivity;
 
@@ -52,7 +51,6 @@ public class ColorPicker extends RecyclerView {
             }
         });
         setAdapter(adapter);
-        Toast.makeText(getContext(), String.valueOf(items.size()), Toast.LENGTH_SHORT).show();
     }
 
     public ColorPicker(Context context, AttributeSet attrs, int defStyle) {

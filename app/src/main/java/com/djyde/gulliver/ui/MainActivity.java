@@ -3,6 +3,7 @@ package com.djyde.gulliver.ui;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,16 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.djyde.gulliver.R;
 import com.djyde.gulliver.adapter.TripsAdapter;
 import com.djyde.gulliver.model.Trip;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import se.emilsjolander.sprinkles.Migration;
+import se.emilsjolander.sprinkles.ModelList;
 import se.emilsjolander.sprinkles.Query;
 import se.emilsjolander.sprinkles.Sprinkles;
 
@@ -31,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle drawerToggle;
+    private FloatingActionButton fab;
 
-    public List<Trip> trips = new ArrayList<Trip>();
+    public ModelList<Trip> trips = new ModelList<Trip>();
     public TripsAdapter tripsAdapter;
 
     @Override
@@ -59,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         navigation = (NavigationView)findViewById(R.id.navigation);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         drawer = (DrawerLayout)findViewById(R.id.drawer);
+        fab = (FloatingActionButton)findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),NewTripActivity.class));
+            }
+        });
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.settings:
                         // TODO setting
-                        startActivity(new Intent(getApplicationContext(), NewTripActivity.class));
                         drawer.closeDrawers();
                         return true;
                     case R.id.history:
@@ -112,5 +121,28 @@ public class MainActivity extends AppCompatActivity {
         trips.clear();
         trips.addAll(Query.many(Trip.class,"SELECT * FROM Trips ORDER BY id DESC").get().asList());
         tripsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_clear:
+                trips.deleteAllAsync(new ModelList.OnAllDeletedCallback() {
+                    @Override
+                    public void onAllDeleted() {
+                        trips.clear();
+                        tripsAdapter.notifyDataSetChanged();
+                    }
+                });
+                return true;
+            default:
+                return true;
+        }
     }
 }

@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.djyde.gulliver.R;
 import com.djyde.gulliver.adapter.TransportationAdapter;
@@ -110,8 +109,6 @@ public class NewTripActivity extends AppCompatActivity {
             @Override
             public void onSaved() {
                 finish();
-                Toast.makeText(getApplicationContext(),"Save!",Toast.LENGTH_SHORT).show();
-
             }
         });
     }
