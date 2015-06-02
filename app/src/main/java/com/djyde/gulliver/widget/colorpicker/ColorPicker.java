@@ -47,6 +47,8 @@ public class ColorPicker extends RecyclerView {
             public void onSelected(Item selectedItem) {
                 ((NewTripActivity)getContext()).relativeLayout.setBackgroundColor(selectedItem.getColor());
                 ((NewTripActivity)getContext()).toolbar.setBackgroundColor(selectedItem.getColor());
+                ((NewTripActivity)getContext()).color = selectedItem.getColor();
+
             }
         });
         setAdapter(adapter);

@@ -48,7 +48,7 @@ public class TransportationAdapter extends BaseAdapter {
     }
 
     @Override
-    public Transportation getItem(int position) {
-        return transportations.get(position);
+    public Object getItem(int position) {
+        return null;
     }
 }

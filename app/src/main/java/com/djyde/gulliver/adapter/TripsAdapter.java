@@ -1,11 +1,11 @@
 package com.djyde.gulliver.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,6 +26,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
         TextView from;
         TextView to;
         TextView info;
+        ImageView icon;
         RelativeLayout background;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -33,6 +34,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
             from = (TextView)itemView.findViewById(R.id.from);
             to = (TextView)itemView.findViewById(R.id.to);
             info = (TextView)itemView.findViewById(R.id.info);
+            icon = (ImageView)itemView.findViewById(R.id.icon);
         }
     }
 
@@ -48,10 +50,24 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.from.setText(trips.get(i).getFrom());
-        viewHolder.to.setText(trips.get(i).getTo());
+        viewHolder.from.setText(trips.get(i).getTrip_from());
+        viewHolder.to.setText(trips.get(i).getTrip_to());
         viewHolder.info.setText("大约 44 分钟");
-        viewHolder.background.setBackgroundColor(Color.parseColor(trips.get(i).getColor()));
+        viewHolder.background.setBackgroundColor(trips.get(i).getColor());
+        switch (trips.get(i).getTransportation()){
+            case "railway":
+                viewHolder.icon.setBackgroundResource(R.drawable.ic_directions_railway_white_48dp);
+                break;
+            case "walk":
+                viewHolder.icon.setBackgroundResource(R.drawable.ic_directions_walk_white_48dp);
+                break;
+            case "subway":
+                viewHolder.icon.setBackgroundResource(R.drawable.ic_directions_subway_white_48dp);
+                break;
+            default:
+                viewHolder.icon.setBackgroundResource(R.drawable.ic_directions_walk_white_48dp);
+                break;
+        }
     }
 
     @Override

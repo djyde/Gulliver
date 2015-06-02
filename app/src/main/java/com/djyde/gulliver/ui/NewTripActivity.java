@@ -7,15 +7,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.djyde.gulliver.R;
 import com.djyde.gulliver.adapter.TransportationAdapter;
 import com.djyde.gulliver.model.Transportation;
+import com.djyde.gulliver.model.Trip;
 import com.djyde.gulliver.widget.colorpicker.ColorPicker;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import se.emilsjolander.sprinkles.Model;
 
 public class NewTripActivity extends AppCompatActivity {
 
@@ -23,6 +30,10 @@ public class NewTripActivity extends AppCompatActivity {
     private ColorPicker colorPicker;
     private AppCompatSpinner spinner;
     public RelativeLayout relativeLayout;
+    private TextView from;
+    private TextView to;
+    public int color;
+    private String transportation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +44,8 @@ public class NewTripActivity extends AppCompatActivity {
         colorPicker = (ColorPicker)findViewById(R.id.color_picker);
         relativeLayout = (RelativeLayout)findViewById(R.id.relativelayout);
         spinner = (AppCompatSpinner)findViewById(R.id.transportation);
+        from = (TextView)findViewById(R.id.from);
+        to = (TextView)findViewById(R.id.to);
         setSupportActionBar(toolbar);
 
         final List<Transportation> transportations = new ArrayList<Transportation>();
@@ -43,6 +56,17 @@ public class NewTripActivity extends AppCompatActivity {
 
 
         spinner.setAdapter(new TransportationAdapter(this, transportations));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                transportation = transportations.get(position).getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         colorPicker.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         colorPicker.setItems(ColorPicker.MATERIAL_COLORS);
@@ -66,7 +90,7 @@ public class NewTripActivity extends AppCompatActivity {
 
         switch (id){
             case R.id.action_done:
-                spinner.getSelectedItemId();
+                newTrip();
                 return true;
             case android.R.id.home:
                 super.onBackPressed();
@@ -74,6 +98,22 @@ public class NewTripActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void newTrip(){
+        Trip trip = new Trip();
+        trip.setTrip_from(from.getText().toString());
+        trip.setTrip_to(to.getText().toString());
+        trip.setColor(color);
+        trip.setTransportation(transportation);
+        trip.saveAsync(new Model.OnSavedCallback() {
+            @Override
+            public void onSaved() {
+                finish();
+                Toast.makeText(getApplicationContext(),"Save!",Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
 
