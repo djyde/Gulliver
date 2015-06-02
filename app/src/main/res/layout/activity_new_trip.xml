@@ -30,6 +30,7 @@
         android:layout_height="56dp"/>
 
     <RelativeLayout
+        android:id="@+id/relativelayout"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="192dp">
@@ -44,8 +45,15 @@
 
     </RelativeLayout>
 
+    <com.djyde.gulliver.widget.colorpicker.ColorPicker
+        android:id="@+id/color_picker"
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"/>
+
     <LinearLayout
-        android:padding="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
