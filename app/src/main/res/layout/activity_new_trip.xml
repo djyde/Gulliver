@@ -22,7 +22,7 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        app:title="本次行程"
+        app:title="@string/current_trip"
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
         app:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
@@ -39,7 +39,7 @@
             android:id="@+id/timer"
             android:textColor="#fff"
             android:textSize="56sp"
-            android:text="30:23"
+            tools:text="30:23"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/from"
-                android:hint="出发地"
+                android:hint="@string/from"
                 android:layout_width="match_parent" android:layout_height="wrap_content"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -73,9 +73,15 @@
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/to"
-                android:hint="目的地"
+                android:hint="@string/to"
                 android:layout_width="match_parent" android:layout_height="wrap_content"/>
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/transportation"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 

@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">Gulliver</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_done">Done</string>
+
+    <string name="current_trip">Current Trip</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+
+    <string name="railway">Railway</string>
+    <string name="car">Car</string>
+    <string name="walk">Walk</string>
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
