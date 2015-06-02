@@ -7,8 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 
 import com.djyde.gulliver.R;
@@ -45,13 +43,6 @@ public class NewTripActivity extends AppCompatActivity {
 
 
         spinner.setAdapter(new TransportationAdapter(this, transportations));
-
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                transportations.get(position);
-            }
-        });
 
         colorPicker.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         colorPicker.setItems(ColorPicker.MATERIAL_COLORS);

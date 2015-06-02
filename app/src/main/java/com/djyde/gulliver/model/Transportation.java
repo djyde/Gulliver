@@ -22,6 +22,10 @@ public class Transportation{
         this.id = id;
     }
 
+    public int getIcon() {
+        return icon;
+    }
+
     public int getBlackIcon() {
         switch (this.id){
             case "railway":
@@ -55,9 +59,9 @@ public class Transportation{
     public String getName() {
         switch (this.id){
             case "walk":
-                return String.valueOf(R.string.walk);
+                return String.valueOf("步行");
             case "railway":
-                return String.valueOf(R.string.railway);
+                return String.valueOf("地铁");
             default:
                 return "Unknown";
         }
