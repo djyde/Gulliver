@@ -21,7 +21,7 @@
             android:label="@string/title_activity_new_trip" >
         </activity>
         <activity
-            android:name=".ui.TripSetActivity"
+            android:name=".ui.AnalyzeActivity"
             android:label="@string/title_activity_trip_set" >
         </activity>
     </application>

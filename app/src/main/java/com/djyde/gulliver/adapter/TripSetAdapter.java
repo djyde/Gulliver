@@ -13,7 +13,6 @@ import com.djyde.gulliver.utils.EasyTimer;
 
 import java.util.List;
 
-import se.emilsjolander.sprinkles.ModelList;
 import se.emilsjolander.sprinkles.Query;
 
 /**
@@ -23,7 +22,6 @@ public class TripSetAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder
 
     private List<TripSet> tripSets;
     private Context context;
-    private long past_time = 0;
 
     public TripSetAdapter(Context context, List<TripSet> tripSets) {
         super();
@@ -48,9 +46,8 @@ public class TripSetAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder
         holder.from.setText(tripSets.get(position).getTrip_from());
         holder.to.setText(tripSets.get(position).getTrip_to());
         holder.background.setBackgroundColor(tripSets.get(position).getColor());
-        past_time = 0;
-        List<Trip> trips = new ModelList<Trip>();
-        trips = Query.many(Trip.class, "SELECT past_time FROM Trips WHERE trip_set_id=?", tripSets.get(position).getId()).get().asList();
+        long past_time = 0;
+        List<Trip> trips = Query.many(Trip.class, "SELECT past_time FROM Trips WHERE trip_set_id=?", tripSets.get(position).getId()).get().asList();
         for (Trip trip : trips){
             past_time += trip.getPast_time();
         }

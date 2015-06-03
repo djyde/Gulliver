@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         drawer.closeDrawers();
                         return true;
                     case R.id.history:
-                        startActivity(new Intent(getApplicationContext(),TripSetActivity.class));
+                        startActivity(new Intent(getApplicationContext(),AnalyzeActivity.class));
                         drawer.closeDrawers();
                         return true;
                     default:
