@@ -23,7 +23,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
     private List<Trip> trips;
     private Context context;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView from;
         TextView to;
         TextView info;
@@ -73,7 +73,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_trip,null,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_trip,viewGroup,false);
         return new ViewHolder(view);
     }
 }

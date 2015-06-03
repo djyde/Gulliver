@@ -20,6 +20,10 @@
             android:name=".ui.NewTripActivity"
             android:label="@string/title_activity_new_trip" >
         </activity>
+        <activity
+            android:name=".ui.TripSetActivity"
+            android:label="@string/title_activity_trip_set" >
+        </activity>
     </application>
 
 </manifest>

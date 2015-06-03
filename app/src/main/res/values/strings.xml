@@ -17,4 +17,8 @@
     <string name="setting">Settings</string>
 
     <string name="title_activity_new_trip">NewTripActivity</string>
+    <string name="title_activity_trip_set">TripSetActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
