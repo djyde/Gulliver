@@ -47,11 +47,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void doMigration(SQLiteDatabase sqLiteDatabase) {
                 sqLiteDatabase.execSQL("CREATE TABLE Trips (" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                "trip_set_id long," +
                                 "trip_from TEXT," +
                                 "trip_to TEXT," +
                                 "color int," +
+                                "past_time long," +
                                 "transportation TEXT" +
+                                ")"
+                );
+                sqLiteDatabase.execSQL("CREATE TABLE TripSets (" +
+                                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                "trip_from TEXT," +
+                                "trip_to TEXT," +
+                                "color int" +
                                 ")"
                 );
             }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.djyde.gulliver.R;
 import com.djyde.gulliver.model.Trip;
+import com.djyde.gulliver.utils.EasyTimer;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.from.setText(trips.get(i).getTrip_from());
         viewHolder.to.setText(trips.get(i).getTrip_to());
-        viewHolder.info.setText("大约 44 分钟");
+        viewHolder.info.setText(EasyTimer.time_render_chn((int)trips.get(i).getPast_time() / 1000));
         viewHolder.background.setBackgroundColor(trips.get(i).getColor());
         switch (trips.get(i).getTransportation()){
             case "railway":

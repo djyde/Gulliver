@@ -39,7 +39,7 @@
             android:id="@+id/timer"
             android:textColor="#fff"
             android:textSize="56sp"
-            tools:text="30:23"
+            android:text="00:00:00"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 

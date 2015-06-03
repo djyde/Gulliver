@@ -16,12 +16,15 @@ import com.djyde.gulliver.R;
 import com.djyde.gulliver.adapter.TransportationAdapter;
 import com.djyde.gulliver.model.Transportation;
 import com.djyde.gulliver.model.Trip;
+import com.djyde.gulliver.model.TripSet;
+import com.djyde.gulliver.utils.EasyTimer;
 import com.djyde.gulliver.widget.colorpicker.ColorPicker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import se.emilsjolander.sprinkles.Model;
+import se.emilsjolander.sprinkles.Query;
 
 public class NewTripActivity extends AppCompatActivity {
 
@@ -31,8 +34,11 @@ public class NewTripActivity extends AppCompatActivity {
     public RelativeLayout relativeLayout;
     private TextView from;
     private TextView to;
-    public int color;
+    public int color = R.color.colorPrimary;
+    private TextView timer;
     private String transportation;
+    private EasyTimer easyTimer;
+    private long time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,7 @@ public class NewTripActivity extends AppCompatActivity {
         spinner = (AppCompatSpinner)findViewById(R.id.transportation);
         from = (TextView)findViewById(R.id.from);
         to = (TextView)findViewById(R.id.to);
+        timer = (TextView)findViewById(R.id.timer);
         setSupportActionBar(toolbar);
 
         final List<Transportation> transportations = new ArrayList<Transportation>();
@@ -71,6 +78,21 @@ public class NewTripActivity extends AppCompatActivity {
         colorPicker.setItems(ColorPicker.MATERIAL_COLORS);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        easyTimer = new EasyTimer();
+        easyTimer.setOnTaskRunListener(new EasyTimer.OnTaskRunListener() {
+            @Override
+            public void onTaskRun(long past_time, String rendered_time) {
+                timer.setText(rendered_time);
+                time = past_time;
+            }
+        });
+        easyTimer.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        easyTimer.stop();
     }
 
     @Override
@@ -100,17 +122,42 @@ public class NewTripActivity extends AppCompatActivity {
     }
 
     private void newTrip(){
-        Trip trip = new Trip();
+        final Trip trip = new Trip();
         trip.setTrip_from(from.getText().toString());
         trip.setTrip_to(to.getText().toString());
         trip.setColor(color);
-        trip.setTransportation(transportation);
-        trip.saveAsync(new Model.OnSavedCallback() {
-            @Override
-            public void onSaved() {
-                finish();
-            }
-        });
+        TripSet tripSet = Query.one(TripSet.class,"SELECT id FROM TripSets WHERE (trip_from = ? AND trip_to = ?) OR (trip_from = ? AND trip_to = ?)",from.getText().toString(),to.getText().toString(),to.getText().toString(),from.getText().toString()).get();
+        if (tripSet == null){
+            final TripSet new_trip_set = new TripSet();
+            new_trip_set.setTrip_to(to.getText().toString());
+            new_trip_set.setTrip_from(from.getText().toString());
+            new_trip_set.setColor(color);
+            new_trip_set.saveAsync(new Model.OnSavedCallback() {
+                @Override
+                public void onSaved() {
+                    trip.setTrip_set_id(new_trip_set.getId());
+                    trip.setPast_time(time);
+                    trip.setTransportation(transportation);
+                    trip.saveAsync(new Model.OnSavedCallback() {
+                        @Override
+                        public void onSaved() {
+                            finish();
+                        }
+                    });
+                }
+            });
+        } else {
+            trip.setTrip_set_id(tripSet.getId());
+            trip.setPast_time(time);
+            trip.setTransportation(transportation);
+            trip.saveAsync(new Model.OnSavedCallback() {
+                @Override
+                public void onSaved() {
+                    finish();
+                }
+            });
+        }
+
     }
 
 

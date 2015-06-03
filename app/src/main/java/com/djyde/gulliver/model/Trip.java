@@ -20,6 +20,9 @@ public class Trip extends Model {
     @Column("id")
     private long id;
 
+    @Column("trip_set_id")
+    private long trip_set_id;
+
     @Column("trip_from")
     private String trip_from;
 
@@ -31,6 +34,25 @@ public class Trip extends Model {
 
     @Column("transportation")
     private String transportation;
+
+    @Column("past_time")
+    private long past_time;
+
+    public long getTrip_set_id() {
+        return trip_set_id;
+    }
+
+    public void setTrip_set_id(long trip_set_id) {
+        this.trip_set_id = trip_set_id;
+    }
+
+    public long getPast_time() {
+        return past_time;
+    }
+
+    public void setPast_time(long past_time) {
+        this.past_time = past_time;
+    }
 
     public int getColor() {
         return color;
