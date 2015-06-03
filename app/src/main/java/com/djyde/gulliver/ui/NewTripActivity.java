@@ -1,6 +1,7 @@
 package com.djyde.gulliver.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +35,8 @@ public class NewTripActivity extends AppCompatActivity {
     public RelativeLayout relativeLayout;
     private TextView from;
     private TextView to;
+    private TextInputLayout from_layout;
+    private TextInputLayout to_layout;
     public int color = R.color.colorPrimary;
     private TextView timer;
     private String transportation;
@@ -51,6 +54,8 @@ public class NewTripActivity extends AppCompatActivity {
         spinner = (AppCompatSpinner)findViewById(R.id.transportation);
         from = (TextView)findViewById(R.id.from);
         to = (TextView)findViewById(R.id.to);
+        from_layout = (TextInputLayout)findViewById(R.id.from_layout);
+        to_layout = (TextInputLayout)findViewById(R.id.to_layout);
         timer = (TextView)findViewById(R.id.timer);
         setSupportActionBar(toolbar);
 
@@ -122,40 +127,46 @@ public class NewTripActivity extends AppCompatActivity {
     }
 
     private void newTrip(){
-        final Trip trip = new Trip();
-        trip.setTrip_from(from.getText().toString());
-        trip.setTrip_to(to.getText().toString());
-        trip.setColor(color);
-        TripSet tripSet = Query.one(TripSet.class,"SELECT id FROM TripSets WHERE (trip_from = ? AND trip_to = ?) OR (trip_from = ? AND trip_to = ?)",from.getText().toString(),to.getText().toString(),to.getText().toString(),from.getText().toString()).get();
-        if (tripSet == null){
-            final TripSet new_trip_set = new TripSet();
-            new_trip_set.setTrip_to(to.getText().toString());
-            new_trip_set.setTrip_from(from.getText().toString());
-            new_trip_set.setColor(color);
-            new_trip_set.saveAsync(new Model.OnSavedCallback() {
-                @Override
-                public void onSaved() {
-                    trip.setTrip_set_id(new_trip_set.getId());
-                    trip.setPast_time(time);
-                    trip.setTransportation(transportation);
-                    trip.saveAsync(new Model.OnSavedCallback() {
-                        @Override
-                        public void onSaved() {
-                            finish();
-                        }
-                    });
-                }
-            });
+        if (from.getText().toString().equals("")){
+            from_layout.setError("请输入出发地");
+        } else if (to.getText().toString().equals("")){
+            to_layout.setError("请输入目的地");
         } else {
-            trip.setTrip_set_id(tripSet.getId());
-            trip.setPast_time(time);
-            trip.setTransportation(transportation);
-            trip.saveAsync(new Model.OnSavedCallback() {
-                @Override
-                public void onSaved() {
-                    finish();
-                }
-            });
+            final Trip trip = new Trip();
+            trip.setTrip_from(from.getText().toString());
+            trip.setTrip_to(to.getText().toString());
+            trip.setColor(color);
+            TripSet tripSet = Query.one(TripSet.class, "SELECT id FROM TripSets WHERE (trip_from = ? AND trip_to = ?) OR (trip_from = ? AND trip_to = ?)", from.getText().toString(), to.getText().toString(), to.getText().toString(), from.getText().toString()).get();
+            if (tripSet == null){
+                final TripSet new_trip_set = new TripSet();
+                new_trip_set.setTrip_to(to.getText().toString());
+                new_trip_set.setTrip_from(from.getText().toString());
+                new_trip_set.setColor(color);
+                new_trip_set.saveAsync(new Model.OnSavedCallback() {
+                    @Override
+                    public void onSaved() {
+                        trip.setTrip_set_id(new_trip_set.getId());
+                        trip.setPast_time(time);
+                        trip.setTransportation(transportation);
+                        trip.saveAsync(new Model.OnSavedCallback() {
+                            @Override
+                            public void onSaved() {
+                                finish();
+                            }
+                        });
+                    }
+                });
+            } else {
+                trip.setTrip_set_id(tripSet.getId());
+                trip.setPast_time(time);
+                trip.setTransportation(transportation);
+                trip.saveAsync(new Model.OnSavedCallback() {
+                    @Override
+                    public void onSaved() {
+                        finish();
+                    }
+                });
+            }
         }
 
     }

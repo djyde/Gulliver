@@ -6,28 +6,24 @@
               android:orientation="vertical"
               tools:context="com.djyde.gulliver.ui.NewTripActivity">
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="192dp">-->
 
-        <!--<android.support.design.widget.CollapsingToolbarLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
-            <!-- -->
-        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
-        <!-- -->
-        <!-- -->
-    <!--</android.support.design.widget.AppBarLayout>-->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        app:title="@string/current_trip"
-        android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
-        app:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
-        app:layout_collapseMode="pin"
-        android:layout_height="56dp"/>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:title="@string/current_trip"
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimary"
+                app:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+                app:layout_collapseMode="pin"
+                android:layout_height="56dp"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/relativelayout"
@@ -58,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/from_layout"
             android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -68,6 +65,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/to_layout"
             android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

@@ -18,6 +18,7 @@ import android.view.View;
 import com.djyde.gulliver.R;
 import com.djyde.gulliver.adapter.TripsAdapter;
 import com.djyde.gulliver.model.Trip;
+import com.djyde.gulliver.model.TripSet;
 
 import se.emilsjolander.sprinkles.Migration;
 import se.emilsjolander.sprinkles.ModelList;
@@ -142,6 +143,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_clear:
+                ModelList<TripSet> tripSets = new ModelList<TripSet>();
+                tripSets.addAll(Query.all(TripSet.class).get().asList());
+                tripSets.deleteAll();
                 trips.deleteAllAsync(new ModelList.OnAllDeletedCallback() {
                     @Override
                     public void onAllDeleted() {
