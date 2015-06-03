@@ -28,6 +28,8 @@ public class Transportation{
 
     public int getBlackIcon() {
         switch (this.id){
+            case "car":
+                return R.drawable.ic_directions_car_black_48dp;
             case "railway":
                 return R.drawable.ic_directions_railway_black_48dp;
             case "subway":
@@ -41,6 +43,8 @@ public class Transportation{
 
     public int getWhiteIcon(){
         switch (this.id){
+            case "car":
+                return R.drawable.ic_directions_car_white_48dp;
             case "railway":
                 return R.drawable.ic_directions_railway_white_48dp;
             case "subway":
@@ -58,6 +62,10 @@ public class Transportation{
 
     public String getName() {
         switch (this.id){
+            case "car":
+                return "小车";
+            case "subway":
+                return "铁路";
             case "walk":
                 return String.valueOf("步行");
             case "railway":

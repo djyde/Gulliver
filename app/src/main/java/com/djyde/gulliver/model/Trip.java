@@ -96,6 +96,8 @@ public class Trip extends Model {
 
     public int getTransportationBlackIcon() {
         switch (this.transportation){
+            case "car":
+                return R.drawable.ic_directions_car_black_48dp;
             case "railway":
                 return R.drawable.ic_directions_railway_black_48dp;
             case "subway":
@@ -109,6 +111,8 @@ public class Trip extends Model {
 
     public int getTransportationWhiteIcon(){
         switch (this.transportation){
+            case "car":
+                return R.drawable.ic_directions_car_white_48dp;
             case "railway":
                 return R.drawable.ic_directions_railway_white_48dp;
             case "subway":

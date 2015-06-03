@@ -61,6 +61,7 @@ public class NewTripActivity extends AppCompatActivity {
 
         final List<Transportation> transportations = new ArrayList<Transportation>();
 
+        transportations.add(new Transportation("car"));
         transportations.add(new Transportation("railway"));
         transportations.add(new Transportation("subway"));
         transportations.add(new Transportation("walk"));

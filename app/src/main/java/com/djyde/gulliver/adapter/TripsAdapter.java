@@ -53,22 +53,9 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.from.setText(trips.get(i).getTrip_from());
         viewHolder.to.setText(trips.get(i).getTrip_to());
-        viewHolder.info.setText(EasyTimer.time_render_chn((int)trips.get(i).getPast_time() / 1000));
+        viewHolder.info.setText(EasyTimer.time_render_chn((int) trips.get(i).getPast_time() / 1000));
         viewHolder.background.setBackgroundColor(trips.get(i).getColor());
-        switch (trips.get(i).getTransportation()){
-            case "railway":
-                viewHolder.icon.setBackgroundResource(R.drawable.ic_directions_railway_white_48dp);
-                break;
-            case "walk":
-                viewHolder.icon.setBackgroundResource(R.drawable.ic_directions_walk_white_48dp);
-                break;
-            case "subway":
-                viewHolder.icon.setBackgroundResource(R.drawable.ic_directions_subway_white_48dp);
-                break;
-            default:
-                viewHolder.icon.setBackgroundResource(R.drawable.ic_directions_walk_white_48dp);
-                break;
-        }
+        viewHolder.icon.setBackgroundResource(trips.get(i).getTransportationWhiteIcon());
     }
 
     @Override
